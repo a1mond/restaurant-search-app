@@ -7,9 +7,12 @@ const navigator = createStackNavigator({
 }, {
     initialRouteName: 'Search',
     defaultNavigationOptions: {
-        title: 'Business Search'
+        title: 'Business Search',
+        cardStyle: {
+            backgroundColor: '#fff'
+        }
     }
-});
-
+}
+);
 
 export default createAppContainer(navigator);
