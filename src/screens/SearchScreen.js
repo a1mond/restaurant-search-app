@@ -3,10 +3,15 @@ import { View, Text, StyleSheet } from 'react-native';
 import SearchBar from "../components/SearchBar";
 import yelp from "../api/yelp";
 import useResults from "../hooks/useResults";
+import ResultsList from "../components/ResultList";
 
 const SearchScreen = () => {
     const [term, setTerm] = useState('');
     const [searchApi, results, errorMessage] = useResults();
+
+    const filterResultsByPrice = (price) => {
+        return results.filter(x => x.price === price);
+    };
 
     return <View>
         <SearchBar
@@ -14,13 +19,19 @@ const SearchScreen = () => {
             onTermChange={(newTerm) => setTerm(newTerm)}
             onTermSubmit={() => { searchApi(term) }}
         />
-        {errorMessage ? <Text>{errorMessage}</Text> : <Text>Found {results.length} results</Text>}
-
+        {errorMessage ? <Text style={styles.messageStyle}>{errorMessage}</Text> : <Text style={styles.messageStyle}>Found {results.length} results</Text>}
+        <ResultsList results={filterResultsByPrice('$')} title='Cost Effective' />
+        <ResultsList results={filterResultsByPrice('$$')} title='Bit Pricier' />
+        <ResultsList results={filterResultsByPrice('$$$')} title='Big Spender' />
     </View>;
 };
 
 const styles = StyleSheet.create({
-
+    messageStyle: {
+        marginVertical: 3,
+        textAlign: 'center',
+        fontSize: 15
+    }
 });
 
 export default SearchScreen;
