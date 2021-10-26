@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons'
+import consts from '../../styles/constantas';
 
 const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
     return <View style={styles.backgroundStyle}>
@@ -21,8 +22,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#F0EEEE',
         height: 50,
         borderRadius: 5,
-        marginHorizontal: 15,
-        flexDirection: 'row'
+        marginHorizontal: consts.MARGIN_HORIZONTAL,
+        flexDirection: 'row',
+        marginBottom: 10
     },
     textInput: {
         flex: 1,
